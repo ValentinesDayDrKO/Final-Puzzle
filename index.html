@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry Question</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #555;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #444;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+        button:hover:enabled {
+            background-color: #222;
+        }
+        #message {
+            margin-top: 10px;
+            color: #d9534f;
+            font-size: 16px;
+        }
+        #timer {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #222;
+            font-weight: bold;
+        }
+        iframe {
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body onload="startTimer();">
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/BPUjVk7bYe8?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <h2>Kayden, congrats on completing all 5 clues (and saying yes). Now please click the unmute button and turn the volume all the way up on your computer.<br><br>
+    I hope you have enjoyed the gifts, riddles, and even the guest appearance... (foreshadowing) <br><br>
+    I put a lot of thought into this entire game/adventure over the last handful of weeks and wanted to make it as special as possible for the most amazing person ever :) however, the game is not done.<br><br>
+    If you want to know what the plan is for Friday...<br><br>
+    You have to solve ONE more puzzle.<br><br>
+    Unfortunately...<br><br>
+    TIME is not on your side either.<br><br>
+    <span style="color: #1E90FF; font-weight: bold;">So here it is: Best Dog of All Time</span></h2>
+
+    <input type="text" id="answer" placeholder="Enter your answer">
+    <button id="submitButton" onclick="checkAnswer()" disabled>Submit</button>
+    <p id="message"></p>
+    <p id="timer"></p>
+
+    <script>
+        let timeRemaining = 180; // 3 minutes (180 seconds)
+        let timerDisplay = document.getElementById("timer");
+        let submitButton = document.getElementById("submitButton");
+
+        function checkAnswer() {
+            let answer = document.getElementById("answer").value.trim();
+            if (timeRemaining > 0) {
+                document.getElementById("message").textContent = "Wait until the song is over!";
+                return;
+            }
+
+            if (answer.toLowerCase() === "daisy") {
+                window.location.href = "https://www.cameo.com/recipient/67a9207fa300ca3ec6d17bfb"; 
+            } else {
+                document.getElementById("message").textContent = "Incorrect answer. Try again, Kayden.";
+            }
+        }
+
+        function startTimer() {
+            function updateTimer() {
+                let minutes = Math.floor(timeRemaining / 60);
+                let seconds = timeRemaining % 60;
+                timerDisplay.textContent = `Wait: ${minutes}m ${seconds}s to think over an answer and enjoy the song :)`;
+                
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    timerDisplay.textContent = "Had to make you listen to the full song! Now you can answer :)";
+                    submitButton.disabled = false; // Enable button
+                }
+            }
+            updateTimer();
+        }
+    </script>
+
+</body>
+</html>
